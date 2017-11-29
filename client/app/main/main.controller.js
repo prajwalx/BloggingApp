@@ -21,7 +21,11 @@
       this.B_title="";
       this.B_name="";
       this.B_blog="";
+      this.searchQ;
 
+      this.pageSize=2;
+      this.allpostcopy=[];
+      this.curpage=0;
       // this.awesomeThings = [];
       //
       // $scope.$on('$destroy', function() {
@@ -47,9 +51,11 @@
       this.$http.get('http://assignment-server.herokuapp.com/posts')
           .then(response =>{
             this.AllPosts=response.data;
+            this.allpostcopy=this.AllPosts.concat();//deep copying data from one array to another
 
             //this.socket.syncUpdates('http://assignment-server.herokuapp.com/posts',this.AllPosts);
-            console.log(this.AllPosts);
+            // console.log(this.AllPosts);
+            this.paginate('s');
           });
       //Get Comments
       this.$http.get('http://assignment-server.herokuapp.com/comments')
@@ -57,11 +63,34 @@
                 this.comments=response.data;
 
                 //this.socket.syncUpdates('http://assignment-server.herokuapp.com/comments',this.comments);
-                console.log((this.comments));
+                // console.log((this.comments));
               });
 
 
 
+    }
+
+    paginate(dir){
+      this.AllPosts.splice(0,this.AllPosts.length);
+      var i=0;
+
+      if(dir==='r')
+      this.curpage++;
+      if(dir==='l')
+      this.curpage--;
+      var j=this.curpage;
+
+      while(i<(this.pageSize)&&j<(this.allpostcopy.length)){
+        this.AllPosts[i++]=this.allpostcopy[j++];
+      }
+      console.log('paginate');
+      console.log(this.allpostcopy);
+      console.log('AllPost below:');
+      console.log(this.AllPosts);
+
+    }
+    numOfPages(){
+      return Math.ceil(this.allpostcopy.length/this.pageSize);
     }
 
     addThing() {

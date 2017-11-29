@@ -67,6 +67,18 @@
 
   </style>
 </head>
+
+<div class=" navbar-fixed-top"style="position:fixed !important;margin-top:0%;margin-bottom:3%;padding:0.5%;background-color:rgba(0,0,0,0.5);z-index:10;" >
+<center>
+
+  <input ng-model="mainCtrl.searchQ"type="text"class="form-control"style="margin-right:0;max-width:50%" placeholder="Search by Author or Title"name="" value="">
+  <!-- <button type="button"class="btn btn-default"style="margin-left:0;" name="button"><i class="glyphicon glyphicon-search"></i></button> -->
+
+
+
+</center>
+</div>
+
 <div class="container">
 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -121,7 +133,7 @@
   <div class="row">
       <div class="col-md-3">
          <div class="">
-          
+
          </div>
       </div>
       <div class="col-md-6">
@@ -192,7 +204,7 @@
 
   </div>
       <!-- Get blogs from API -->
-        <div class="post"ng-show="mainCtrl.alpst"ng-repeat="x in mainCtrl.AllPosts ">
+        <div class="post"ng-show="mainCtrl.alpst"ng-repeat="x in mainCtrl.AllPosts |filter:mainCtrl.searchQ">
             <a href="#"ng-click="mainCtrl.Display(x)"><p style="font-size:25px;font-weight:bold">{{x.title}}</p></a>
             <div class="horiLinee"style="border:solid 2px crimson;"></div>
 
@@ -211,9 +223,25 @@
                 </div>
             </div>
             <hr>
-            <!-- <br><br> -->
+            <br><br>
         </div>
 
+        <!-- Pagination menu -->
+        <center>
+        <ul class="pagination pagination-lg"ng-show="mainCtrl.alpst">
+          <li><button ng-disabled="mainCtrl.curpage == 0"type="button"class="btn btn-primary"
+            ng-click="mainCtrl.paginate('l')"name="button">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+          </button></li>
+
+          <li><button ng-disabled="mainCtrl.curpage == mainCtrl.numOfPages()-1" ng-click="mainCtrl.paginate('r')"
+            type="button"class="btn btn-primary" name="button">
+                <span class="glyphicon glyphicon-arrow-right"></span>
+          </button></li>
+        <h4 style="color:lightblack;">{{mainCtrl.curpage+1}}&nbsp of &nbsp {{mainCtrl.numOfPages()}}</h4>
+        </ul>
+
+        </center>
         <!-- Single Post -->
         <div class="singlePost"ng-show="mainCtrl.sngpst">
 
