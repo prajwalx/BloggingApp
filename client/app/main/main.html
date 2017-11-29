@@ -31,9 +31,34 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <style media="screen">
-    .item{
+    .item
+    {
       align-content: center;
     }
+      .horiLine
+        {
+        position: relative;
+
+        width: 30px;
+        border: solid 2px red;
+        border-color: red transparent transparent transparent;
+        }
+      body{
+          background-color: whitesmoke;
+          }
+          .post{
+            max-height: 250px;
+            background-color: white;
+            padding: 3%;
+            border: solid 4px whitesmoke;
+
+          }
+          .singlePost{
+            background-color: white;
+            padding: 5%;
+            padding-top: 1%;
+            /*border: solid 5px grey;*/
+          }
   </style>
 </head>
 <div class="container">
@@ -47,7 +72,7 @@
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner"style="height:350px">
+    <div class="carousel-inner"style="max-height:350px">
       <div class="item active"style="width=100%;height=43%;">
         <img style="max-height=100%;max-width=100%;transform:translateY(+0%)"src="http://www.indiatravelblog.com/images/Share-your-travel-blog-in-IndiaTravelBlog.jpg" alt="IMG1" >
       </div>
@@ -73,3 +98,88 @@
   </div>
 
 </div>
+<!-- Main Content Below Carousel -->
+<div class="container-fluid">
+  <!--  Text Below Carousel-->
+      <center>
+        </br>
+        <p style="font-size:20px;"> B L O G S</p>
+
+        <div class="horiLine"style="border:solid 2px crimson;">
+
+        </div>
+        <br><br><br>
+      </center>
+
+      <!--Blog Posts  -->
+  <div class="row">
+      <div class="col-md-3">
+         <div class="">
+
+         </div>
+      </div>
+      <div class="col-md-6">
+
+        <div class="post"ng-show="mainCtrl.alpst"ng-repeat="x in mainCtrl.AllPosts ">
+            <a href="#"ng-click="mainCtrl.Display(x)"><p style="font-size:25px;font-weight:bold">{{x.title}}</p></a>
+            <div class="horiLinee"style="border:solid 2px crimson;"></div>
+
+            <!-- Left-aligned media object -->
+            <div class="media">
+                <div class="media-left">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzu-AGpEWSQJBNjem4U98pkJYFqcFHB7mTQ29Op6MTwtIphexlZg" class="media-object img-circle" style="width:60px;float:left">
+                </div>
+                <div class="media-body"style="padding-left:2%">
+                  <b><h4 class="media-heading">{{x.author}}</h4></b>
+                  <h7 style="color:grey">{{x.date}}</h7>
+                  <a href="#"ng-click="mainCtrl.Display(x)">
+                    <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  </a>
+
+                </div>
+            </div>
+            <hr>
+            <!-- <br><br> -->
+        </div>
+
+        <!-- Single Post -->
+        <div class="singlePost"ng-show="mainCtrl.sngpst">
+
+              <h1 class="jumbotron" style="font-weight:bold">{{mainCtrl.SinglePost.title}}
+                <a href="#"ng-click="mainCtrl.closeSngpst()">
+                <span style="float:right;padding-right:0px;transform:translateY(-100%);"class="glyphicon glyphicon-remove-circle">
+                </span></a></h1>
+
+              <!-- Left-aligned media object -->
+              <div class="media">
+                  <div class="media-left">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzu-AGpEWSQJBNjem4U98pkJYFqcFHB7mTQ29Op6MTwtIphexlZg" class="media-object img-circle" style="width:60px;float:left">
+                  </div>
+                  <div class="media-body"style="padding-left:2%">
+                    <b><h4 class="media-heading">{{mainCtrl.SinglePost.author}}</h4></b>
+                    <h7 style="color:grey">{{mainCtrl.SinglePost.date}}</h7>
+                    <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  </div>
+              </div>
+              <hr>
+
+              <div class="">
+                <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </div>
+        </div>
+
+
+
+      </div>
+      <!-- End Col-md-6 -->
+
+  </div>
+      <!--End Row  -->
+</div>
+<!-- End container-fluid -->
