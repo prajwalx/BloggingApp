@@ -73,13 +73,14 @@
     paginate(dir){
       this.AllPosts.splice(0,this.AllPosts.length);
       var i=0;
-
+      var j=0;
       if(dir==='r')
       this.curpage++;
       if(dir==='l')
       this.curpage--;
-      var j=this.curpage;
-
+      if(dir!=='s')
+      j=(this.curpage)*(this.pageSize);
+      console.log(j);
       while(i<(this.pageSize)&&j<(this.allpostcopy.length)){
         this.AllPosts[i++]=this.allpostcopy[j++];
       }
