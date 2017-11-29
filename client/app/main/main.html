@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
   <style media="screen">
     .item
     {
@@ -58,6 +59,9 @@
             padding: 5%;
             padding-top: 1%;
             /*border: solid 5px grey;*/
+          }
+          .comment{
+            background-color: whitesmoke;
           }
   </style>
 </head>
@@ -132,7 +136,7 @@
                 <div class="media-body"style="padding-left:2%">
                   <b><h4 class="media-heading">{{x.author}}</h4></b>
                   <h7 style="color:grey">{{x.date}}</h7>
-                  <a href="#"ng-click="mainCtrl.Display(x)">
+                  <a href="#"ng-click="mainCtrl.Display(x);">
                     <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                   </a>
 
@@ -172,8 +176,48 @@
                 <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <p style="color:black !important">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               </div>
-        </div>
 
+              <!-- Comments Section -->
+
+              <!-- Add comment -->
+              <div class="comment"style="padding-top:3%;padding-left:4%">
+                <!-- Left-aligned media object -->
+                  <div class="media">
+                      <div class="media-left"style="height:105px;width:60px;float:left;">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzu-AGpEWSQJBNjem4U98pkJYFqcFHB7mTQ29Op6MTwtIphexlZg" class="media-object img-circle" style="max-height:100%;max-width:100%;float:left">
+                      </div>
+                      <div ng-class="mainCtrl.cmtCls"style="padding-left:2%;padding-top:2%;max-width:50%">
+                        <input type="text"class="form-control" name="" value=""ng-model="mainCtrl.TextComment"placeholder="Add a Comment">
+
+                        <div class="input-group-btn">
+                          <button class="btn btn-default" type="submit"
+                          ng-click="mainCtrl.AddComment()">
+                            <i class="glyphicon glyphicon-comment"></i>
+                          </button>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- End-Add-Comment -->
+                  <hr>
+              <!-- Load Comments from API -->
+              <div class="media"ng-repeat="x in mainCtrl.comments| filter:{postId:mainCtrl.SinglePost.id}" >
+                  <div class="media-left"style="height:105px;width:60px;float:left;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzu-AGpEWSQJBNjem4U98pkJYFqcFHB7mTQ29Op6MTwtIphexlZg" class="media-object img-circle" style="max-height:100%;max-width:100%;float:left">
+                  </div>
+                  <div class="media-body "style="padding-left:2%;padding-top:-2%;max-width:50%">
+                    <b><h4 class="media-heading">Anonymous</h4></b>
+                    <h7 style="color:grey">{{mainCtrl.SinglePost.date}}</h7>
+                    <p style="color:black !important">{{x.body}}</p>
+                  </div>
+              </div>
+              </div>
+
+
+
+
+
+        </div>
+        <!--End-Single-Post  -->
 
 
       </div>
@@ -183,3 +227,9 @@
       <!--End Row  -->
 </div>
 <!-- End container-fluid -->
+<script type="text/javascript">
+  $(document).ready(function () {
+    console.log('Ready');
+  });
+
+</script>
