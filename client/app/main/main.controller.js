@@ -4,8 +4,9 @@
 
   class MainController {
 
-    constructor($http, $scope, socket) {
+    constructor($http, $scope, socket,$window) {
       this.$http = $http;
+      this.$window = $window;
       this.socket = socket;
       this.AllPosts=[];
 
@@ -15,6 +16,12 @@
       this.comments=[];
       this.TextComment="";
       this.cmtCls;
+      this.blgcls;
+      this.date="";
+      this.B_title="";
+      this.B_name="";
+      this.B_blog="";
+
       // this.awesomeThings = [];
       //
       // $scope.$on('$destroy', function() {
@@ -31,7 +38,11 @@
 
       //initialise comment class
       this.cmtCls="media-body input-group form-group has-feedback";
+      //initialise blog modal input class
+      this.blgcls="modal-body form-group has-feedback";
 
+      //initialise Date
+      this.date=new Date().toDateString();
       //Get Posts
       this.$http.get('http://assignment-server.herokuapp.com/posts')
           .then(response =>{
@@ -81,6 +92,37 @@
     closeSngpst(){
       this.alpst=true;
       this.sngpst=false;
+
+    }
+    AddBlog(){
+      this.blgcls="modal-body form-group has-feedback";
+      console.log(this.B_title);
+      console.log(this.B_name);
+      console.log(this.B_blog);
+
+      //if non-empty fields
+      if(!(this.B_title===""||this.B_name==="")){
+        this.blgcls="modal-body form-group has-feedback has-success";
+
+        this.$http.post('http://assignment-server.herokuapp.com/posts',{
+          title:this.B_title,
+          author:this.B_name,
+          date:this.date
+        }).then(response=>{
+          this.B_title="";
+          this.B_name="";
+          this.B_blog="";
+          console.log(response.data);
+          this.AllPosts.push(response.data);
+          this.$window.alert("Blog Posted Successfully ");
+
+
+        });
+      }
+      else {
+        this.blgcls="modal-body form-group has-feedback has-error";
+        this.$window.alert("Error! Unable to post Empty Data! ");
+      }
 
     }
     AddComment(){

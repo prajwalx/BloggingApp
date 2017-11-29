@@ -48,7 +48,7 @@
           background-color: whitesmoke;
           }
           .post{
-            max-height: 250px;
+            /*max-height: 250px;*/
             background-color: white;
             padding: 3%;
             border: solid 4px whitesmoke;
@@ -63,6 +63,8 @@
           .comment{
             background-color: whitesmoke;
           }
+
+
   </style>
 </head>
 <div class="container">
@@ -119,11 +121,77 @@
   <div class="row">
       <div class="col-md-3">
          <div class="">
-
+          
          </div>
       </div>
       <div class="col-md-6">
+      <!-- Add a Blog -->
+      <div class="post"ng-show="mainCtrl.alpst">
+          <a href="#"data-toggle="modal"data-target="#myModal"><p class="text-center text-primary"style="font-size:25px;font-weight:bold;color:black;">A D D &nbsp B L O G <span class="glyphicon glyphicon-plus"></span></p></a>
+          <div class="horiLinee"style="border:solid 2px crimson;"></div>
 
+          <!-- Left-aligned media object -->
+          <div class="media">
+              <center><div class="media-left"style="width:280px;height:120px;">
+                <img src="https://cdn.dribbble.com/users/84829/screenshots/1005966/attachments/119053/profile-icon.png" class="media-object img-responsive" style="max-width:100%;max-height:100%;">
+              </div>
+              <div class="media-body"style="padding-left:2%">
+                <b><h4 class="media-heading">Become a Blogger Today!</h4></b>
+                <h7 style="color:grey">{{mainCtrl.date}}</h7>
+                <a href="#"data-toggle="modal"data-target="#myModal">
+                  <p style="color:black !important">Easy.Simple.Elegant.<br>Click <u>here</u> to begin.<br><br> H A P P Y &nbsp B L O G G I N G</p>
+                </a>
+
+              </div>
+            </center>
+          </div>
+          <hr>
+          <br><br>
+      </div>
+      <!-- Modal for adding A Blog -->
+      <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create Blog</h4>
+        </div>
+        <div ng-class="mainCtrl.blgcls">
+
+              <div class="form-group">
+                <label for="">Blog Title</label>
+                <input ng-model="mainCtrl.B_title"type="text" class="form-control" id="" placeholder="Enter The Blog Title ">
+                <!-- <p class="help-block">Help text here.</p> -->
+              </div>
+
+              <div class="form-group">
+                <label for="">Name</label>
+                <input ng-model="mainCtrl.B_name"type="text" class="form-control" id="" placeholder="Enter Your Name">
+                <!-- <p class="help-block">Help text here.</p> -->
+              </div>
+
+              <div class="form-group">
+                <label for="">B L O G</label>
+                <textarea ng-model="mainCtrl.B_blog"name="name" class="form-control"rows="8"placeholder="Write you blog here" cols="80"></textarea>
+                <p class="help-block">Currently not compulsory.</p>
+              </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal"ng-click="mainCtrl.AddBlog()" name="button">Submit</button>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+      <!-- Get blogs from API -->
         <div class="post"ng-show="mainCtrl.alpst"ng-repeat="x in mainCtrl.AllPosts ">
             <a href="#"ng-click="mainCtrl.Display(x)"><p style="font-size:25px;font-weight:bold">{{x.title}}</p></a>
             <div class="horiLinee"style="border:solid 2px crimson;"></div>
