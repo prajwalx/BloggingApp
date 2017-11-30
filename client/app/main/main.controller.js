@@ -143,7 +143,8 @@
           this.B_name="";
           this.B_blog="";
           console.log(response.data);
-          this.AllPosts.push(response.data);
+          //this.AllPosts.push(response.data);
+          this.allpostcopy.push(response.data);
           this.$window.alert("Blog Posted Successfully ");
 
 
